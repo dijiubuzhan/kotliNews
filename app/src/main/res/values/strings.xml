@@ -1,0 +1,12 @@
+<resources>
+    <string name="app_name">kotliNews</string>
+    <string name="head_name">Stupid boy</string>
+    <string name="hello_weather">查询天气</string>
+    <string name="about_name">About</string>
+    <string name="weather_input_hint">请输入城市名拼音</string>
+    <string name="weather_check">查询</string>
+    <string name="pre_max_tem">最高气温：</string>
+    <string name="pre_min_tem">最低气温：</string>
+    <string name="pre_day_descripe">日间天气：</string>
+    <string name="pre_night_descripe">夜间天气：</string>
+</resources>
