@@ -5,7 +5,7 @@ package com.shan.kotlinews.logic
  */
 
 import com.shan.kotlinews.model.MultiNewsBean
-import io.reactivex.Observable
+import retrofit2.Call
 import retrofit2.http.*
 
 interface ApiService {
@@ -15,5 +15,5 @@ interface ApiService {
 
     @GET("http://is.snssdk.com/api/news/feed/v62/?iid=5034850950&device_id=6096495334&refer=1&count=20&aid=13")
     fun getNewsArticle(@Query("category") category:String,
-                       @Query("max_behot_time") maxBehotTime:String):Observable<MultiNewsBean>
+                       @Query("max_behot_time") maxBehotTime:String): Call<MultiNewsBean>
 }

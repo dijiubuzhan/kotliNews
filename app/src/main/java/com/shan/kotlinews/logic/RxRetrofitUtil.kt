@@ -1,7 +1,7 @@
 package com.shan.kotlinews.logic
 
 import retrofit2.Retrofit
-import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory
+
 import retrofit2.converter.gson.GsonConverterFactory
 
 /**
@@ -10,7 +10,6 @@ import retrofit2.converter.gson.GsonConverterFactory
 object RxRetrofitUtil {
     val mRetrofitBuilder = Retrofit.Builder()
         .addConverterFactory(GsonConverterFactory.create())
-        .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
 
 
     fun baseUrl(baseUrl:String):RxRetrofitUtil{

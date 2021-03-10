@@ -3,7 +3,6 @@ package com.shan.kotlinews.ui
 import android.content.Intent
 import android.graphics.Color
 import android.os.Bundle
-import android.util.Log
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProviders
@@ -45,7 +44,7 @@ class MainActivity : AppCompatActivity() {
             viewModel.newItems.clear()
         }
         viewModel.newItems.addAll(list)
-        DiffCallback.create(viewModel.oldItems, viewModel.newItems, m_RecycleAdapter!!)
+        DiffCallback.create(viewModel.oldItems, viewModel.newItems, m_RecycleAdapter)
         viewModel.oldItems.clear()
         viewModel.oldItems.addAll(viewModel.newItems)
         LogUtil.d("doSetAdapter,viewModel.oldItems.size="+viewModel.oldItems.size+",,viewModel.oldItems="+viewModel.oldItems)
@@ -78,7 +77,7 @@ class MainActivity : AppCompatActivity() {
         recycle_view.setHasFixedSize(true)
         recycle_view.itemAnimator = DefaultItemAnimator()
         recycle_view.adapter = m_RecycleAdapter
-        recycle_view.setOnScrollChangeListener { v, scrollX, scrollY, oldScrollX, oldScrollY ->
+        recycle_view.setOnScrollChangeListener { _, _, _, _, _ ->
             val layoutManager = recycle_view.layoutManager as LinearLayoutManager
             val itemCount = layoutManager!!.itemCount
             val lastPosition = layoutManager.findLastCompletelyVisibleItemPosition()
@@ -87,10 +86,12 @@ class MainActivity : AppCompatActivity() {
                 viewModel.searchNews()
             }
         }
-        viewModel.netItems.observe(this, { items ->
+        viewModel.netItems.observe(this, { result ->
             swipeRefresh!!.isRefreshing = false
-            if (items !=null) {
-                doSetAdapter(items)
+            val dataList = result.getOrNull()
+            LogUtil.d("viewModel.netItems change,dataList="+dataList)
+            if (dataList !=null && dataList.isNotEmpty()) {
+                doSetAdapter(dataList)
             }else{
                 Toast.makeText(this@MainActivity, "update error", Toast.LENGTH_SHORT).show()
             }
